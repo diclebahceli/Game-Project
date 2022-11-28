@@ -15,10 +15,10 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //get the mouse position
         target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = target - new Vector2(transform.position.x,transform.position.y);
+        Vector2 direction = target - new Vector2(transform.position.x, transform.position.y);
         direction = direction.normalized;
         rb.velocity = direction * speed;
-        Destroy(gameObject,3f);
+        Destroy(gameObject, 3f);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -26,9 +26,9 @@ public class Bullet : MonoBehaviour
         if (col.collider.tag == "Wall")
         {
             counter++;
-            if (counter>=3)
+            if (counter >= 3)
             {
-                Destroy(gameObject,0.01f);
+                Destroy(gameObject, 0.01f);
             }
         }
 
@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   //moves the bullet along to the mouse position
-        
-        
+
+
     }
 }
