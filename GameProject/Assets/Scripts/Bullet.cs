@@ -31,12 +31,19 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject,0.01f);
             }
         }
-
-        if (col.collider.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
     }
+
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+           // col.gameObject.takeHit();
+            Destroy(gameObject);
+            
+        }   
+    }
+    
 
     // Update is called once per frame
     void Update()
