@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private bool hasGun;
+    private int lifeCount;
     public Rigidbody2D rb;
     public float speed;
     private Vector2 movement;
@@ -13,13 +15,25 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hasGun = true;
         animator = GetComponent<Animator>();
+        lifeCount = 5;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (hasGun)
+        {
+            animator.SetBool("hasGun", true);
+        }
+        else
+        {
+            animator.SetBool("hasGun", false);
+        }
+
+        print(rb.velocity);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (mousePos.x > transform.position.x)
@@ -42,7 +56,25 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("speedChecker", 0);
         }
+    }
 
+    public void takeHit(int damage)
+    {
+        lifeCount -= damage;
+        if (lifeCount < 0)
+        {
+            animator.SetBool("dead", true);
+            Destroy(gameObject, 1f);
+        }
+    }
+    public void takeHit()
+    {
+        lifeCount--;
+        if (lifeCount < 0)
+        {
+            animator.SetBool("dead", true);
+            Destroy(gameObject, 1f);
+        }
 
     }
 
@@ -52,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         float yAxis = Input.GetAxisRaw("Vertical");
 
         Vector2 dir = new Vector2(xAxis, yAxis).normalized;
+
 
         movement = dir * speed * Time.deltaTime;
         rb.velocity = movement;
