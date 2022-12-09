@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2004667377986883135}
-  speed: 400
+  speed: 200
   animator: {fileID: 0}
 --- !u!50 &2004667377986883135
 Rigidbody2D:
@@ -293,10 +293,12 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2004667377986883104}
+
     - target: {fileID: 2249239671714641625, guid: 677b92e3a7e165fbf9a43c74e7f7c234, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677b92e3a7e165fbf9a43c74e7f7c234, type: 3}
 --- !u!4 &352659333794794206 stripped
