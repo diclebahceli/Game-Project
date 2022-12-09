@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cross: {fileID: 8785319887556152163, guid: 47bc1caf70fbe80528378a030afbb2c8, type: 3}
   bullet: {fileID: 2531301270782955106, guid: ea9fd3122bc13506c90b046d65df22b9, type: 3}
-  player: {fileID: 4908215922707758440, guid: d63ebb1cc511e46a59fa24d8c7b10902, type: 3}
+  player: {fileID: 2004667377986883104, guid: 8e3764162d2e7453192f5f83e4033be9, type: 3}
 --- !u!1 &2249239671714641625
 GameObject:
   m_ObjectHideFlags: 0
