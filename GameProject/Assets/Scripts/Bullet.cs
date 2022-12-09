@@ -34,15 +34,6 @@ public class Bullet : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-           // col.gameObject.takeHit();
-            Destroy(gameObject);
-            
-        }   
-    }
     
 
     // Update is called once per frame
