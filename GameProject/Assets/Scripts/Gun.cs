@@ -14,18 +14,18 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject child;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
             Input.mousePosition.y, transform.position.z));
         //Change the crosshair position belongs to the mouse position
         cross.transform.position = new Vector3(mousePosition.x, mousePosition.y, transform.position.z);
 
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             shoot();
@@ -33,15 +33,18 @@ public class Gun : MonoBehaviour
 
         Vector3 targetDirection = mousePosition - transform.position;
         float rotateZ = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(this.transform.rotation.x,transform.rotation.y,rotateZ);
-        
-        this.transform.position = new Vector3(player.transform.position.x,player.transform.position.y-(0.7f),player.transform.position.z);
-        
-        
-        Vector3 localScale = new Vector3(0.8f,0.8f,1);
-        if(rotateZ>90 || rotateZ<-90){
+        transform.rotation = Quaternion.Euler(this.transform.rotation.x, transform.rotation.y, rotateZ);
+
+        this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - (0.7f), player.transform.position.z);
+
+
+        Vector3 localScale = new Vector3(0.8f, 0.8f, 1);
+        if (rotateZ > 90 || rotateZ < -90)
+        {
             localScale.y = -0.8f;
-        }else{
+        }
+        else
+        {
             localScale.y = +0.8f;
         }
         this.transform.localScale = localScale;

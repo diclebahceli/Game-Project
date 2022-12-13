@@ -23,18 +23,18 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.tag == "Wall")
+        // if (col.collider.tag == "Wall")
+        // {
+        counter++;
+        if (counter >= 3)
         {
-            counter++;
-            if (counter >= 3)
-            {
-                Destroy(gameObject, 0.01f);
-            }
+            Destroy(gameObject, 0.01f);
         }
+        // }
     }
 
 
-    
+
 
     // Update is called once per frame
     void Update()
