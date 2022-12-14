@@ -15,8 +15,10 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //get the mouse position
         target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         Vector2 direction = target - new Vector2(transform.position.x, transform.position.y);
         direction = direction.normalized;
+
         rb.velocity = direction * speed;
         Destroy(gameObject, 3f);
     }
@@ -31,15 +33,5 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject, 0.01f);
         }
         // }
-    }
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {   //moves the bullet along to the mouse position
-
-
     }
 }

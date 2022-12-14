@@ -6,7 +6,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class PlayFabManager : MonoBehaviour
+public class AuthentaticationManager : MonoBehaviour
 {
     [SerializeField] TMP_Text messageTextLogin;
     [SerializeField] TMP_InputField emailInputLogin;
@@ -137,7 +137,7 @@ public class PlayFabManager : MonoBehaviour
     IEnumerator LoadMainMenu()
     {
         yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene("Connecting");
 
     }
 }
