@@ -9,12 +9,17 @@ using PlayFab.ClientModels;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
 
+    public static RoomManager Instance;
     [SerializeField] TMP_InputField roomNameInputField;
     [SerializeField] TMP_Text errorText;
     [SerializeField] TMP_Text roomName;
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListItemPrefab;
 
+
+    void Awake() {
+        Instance = this;   
+    }
      void Start()
     {
         GetUserName();
@@ -70,6 +75,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         MenuManager.Instance.openMenu("ErrorMenu");
    }
 
+   public void JoinRoom(RoomInfo info){
+    PhotonNetwork.JoinRoom(info.Name);
+    MenuManager.Instance.openMenu("LoadingMenu");
+   }
+
    public void leaveRoom(){
     PhotonNetwork.LeaveRoom();
     MenuManager.Instance.openMenu("LoadingMenu");
@@ -81,6 +91,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     
     public override void OnRoomListUpdate(List<RoomInfo> roomList){
-
+        
+        foreach(Transform trans in roomListContent){
+                Destroy(trans.gameObject);
+            }
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            Instantiate(roomListItemPrefab,roomListContent).
+                            GetComponent<RoomListItem>().setUp(roomList[i]);
+        }
     }
 }
