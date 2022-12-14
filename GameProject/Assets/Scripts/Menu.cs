@@ -5,7 +5,7 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {    
     public string menuName;
-    [HideInInspector] public bool isOpen;
+     public bool isOpen;
     public void open(){
         isOpen=true;
         gameObject.SetActive(true);
