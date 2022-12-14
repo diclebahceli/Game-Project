@@ -15,22 +15,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListItemPrefab;
 
-     void Start()
+    void Start()
     {
         GetUserName();
+
     }
 
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
-        
+
     }
 
     public override void OnJoinedLobby()
     {
         print("Joined lobby...");
         MenuManager.Instance.openMenu("TitleMenu");
-        
+
     }
 
     void GetUserName()
@@ -50,37 +51,43 @@ public class RoomManager : MonoBehaviourPunCallbacks
     void OnError(PlayFabError error)
     {
     }
-   public void CreateRoom(){
-        if(roomNameInputField.text.Length<=0){
+    public void CreateRoom()
+    {
+        if (roomNameInputField.text.Length <= 0)
+        {
             return;
         }
         PhotonNetwork.CreateRoom(roomNameInputField.text);
         MenuManager.Instance.openMenu("LoadingMenu");
-   }
+    }
 
 
-   public override void OnJoinedRoom(){
+    public override void OnJoinedRoom()
+    {
         MenuManager.Instance.openMenu("Room");
         roomName.text = PhotonNetwork.CurrentRoom.Name;
-   }
+    }
 
-    
-   public override void OnCreateRoomFailed(short returnCode, string message){
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
         errorText.text = "Room Creation Failed: " + message;
         MenuManager.Instance.openMenu("ErrorMenu");
-   }
+    }
 
-   public void leaveRoom(){
-    PhotonNetwork.LeaveRoom();
-    MenuManager.Instance.openMenu("LoadingMenu");
-   }
+    public void leaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        MenuManager.Instance.openMenu("LoadingMenu");
+    }
 
     public override void OnLeftRoom()
     {
         MenuManager.Instance.openMenu("TitleMenu");
     }
-    
-    public override void OnRoomListUpdate(List<RoomInfo> roomList){
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
 
     }
 }
