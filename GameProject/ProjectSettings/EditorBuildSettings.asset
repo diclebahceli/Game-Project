@@ -8,16 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Authentication.unity
     guid: b031ff2ff45d473f785878baf43cfa41
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: a9f14c001b5b65a26acf3cb3b0405018
   - enabled: 1
-    path: Assets/Scenes/Forest Map 2 Player.unity
-    guid: 2f4f5c7f60c86e0d29ea14493930e18f
+    path: Assets/Scenes/WaitingLobbyDungeon.unity
+    guid: 04165fb75c934c32e8492bb3a811ffb1
   - enabled: 1
     path: Assets/Scenes/Dungeon2.unity
     guid: 76eb6484fcdcda22fba32e692b3b0d96
+  - enabled: 1
+    path: Assets/Scenes/Forest Map 2 Player.unity
+    guid: 2f4f5c7f60c86e0d29ea14493930e18f
   m_configObjects: {}

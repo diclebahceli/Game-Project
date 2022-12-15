@@ -2,21 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Pistol : MonoBehaviour, IGun
 {
     private Vector3 mousePosition;
     public GameObject cross;
-    public GameObject bullet;
     public GameObject player;
+    [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject spawnPoint;
 
     private bool canShoot = true;
     [SerializeField] private GameObject reloadIcon;
 
-    // Update is called once per frame
+    private PhotonView photonView;
+    void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+
+    }
+    private void Start()
+    {
+        cross.SetActive(photonView.IsMine);
+
+    }
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         GetMousePos();
         PutGun();
         PutCross();
@@ -32,7 +47,7 @@ public class Pistol : MonoBehaviour, IGun
     //Creates bulet on the position that you were in
     public void Shoot()
     {
-        Instantiate(bullet, spawnPoint.transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("bullet", spawnPoint.transform.position, Quaternion.identity);
         canShoot = false;
     }
 
@@ -79,7 +94,7 @@ public class Pistol : MonoBehaviour, IGun
 
     public void GetMousePos()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+        mousePosition = playerCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
             Input.mousePosition.y, transform.position.z));
     }
 

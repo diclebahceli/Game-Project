@@ -6,14 +6,17 @@ using TMPro;
 
 public class RoomListItem : MonoBehaviour
 {
-   [SerializeField] TMP_Text text;
-   RoomInfo info;
-    public void setUp(RoomInfo _info){
-        info =_info;
-        text.text =_info.Name;
+    [SerializeField] TMP_Text text;
+    RoomInfo info;
+    public void setUp(RoomInfo _info)
+    {
+        info = _info;
+        text.text = _info.Name;
     }
 
-    public void OnClick(){
+    public void OnClick()
+    {
+        print("Joining room");
         RoomManager.Instance.JoinRoom(info);
     }
 }
