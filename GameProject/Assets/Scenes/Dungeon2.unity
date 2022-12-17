@@ -13022,6 +13022,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5795754749628380885, guid: 63d33cb1aab3c5ddca304ea444ebddc4, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4129213528957513498, guid: 63d33cb1aab3c5ddca304ea444ebddc4, type: 3}
       propertyPath: playerToFollow
       value: 

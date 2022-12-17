@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Photon.Pun;
 using UnityEngine;
 
 public class ShotgunBullet : MonoBehaviour
@@ -25,13 +26,19 @@ public class ShotgunBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        // if (col.collider.tag == "Wall")
-        // {
-        counter++;
+        if (col.collider.tag == "Wall")
+        {
+            print(PhotonNetwork.NickName + " " + counter);
+            counter++;
+        }
         if (counter >= 3)
         {
             Destroy(gameObject, 0.01f);
         }
-        // }
+        if (col.collider.CompareTag("Player"))
+        {
+            col.gameObject.GetComponent<PlayerMovement>().takeHit();
+            Destroy(gameObject);
+        }
     }
 }

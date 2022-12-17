@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425021029038845214}
   m_LocalRotation: {x: -0, y: -0, z: 0.04485364, w: 0.9989936}
-  m_LocalPosition: {x: 0.6, y: 0.147, z: 0}
+  m_LocalPosition: {x: 0.8, y: 0.147, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cross: {fileID: 0}
-  bullet: {fileID: 6317457968700950779, guid: f628104955f2b37fd85d7b5df6a4414f, type: 3}
   player: {fileID: 0}
   playerCamera: {fileID: 0}
   spawnPoints:
@@ -203,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6281839240160037845}
   m_LocalRotation: {x: -0, y: -0, z: 0.04485364, w: 0.9989936}
-  m_LocalPosition: {x: 0.6, y: -0.152, z: 0}
+  m_LocalPosition: {x: 0.8, y: -0.152, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

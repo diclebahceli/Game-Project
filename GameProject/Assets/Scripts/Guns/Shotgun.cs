@@ -64,14 +64,14 @@ public class Shotgun : MonoBehaviour, IGun
         float rotateZ = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(this.transform.rotation.x, transform.rotation.y, rotateZ);
 
-        Vector3 localScale = new Vector3(0.8f, 0.8f, 1);
+        Vector3 localScale = new Vector3(1f, 1f, 1);
         if (rotateZ > 90 || rotateZ < -90)
         {
-            localScale.y = -0.8f;
+            localScale.y = -1f;
         }
         else
         {
-            localScale.y = +0.8f;
+            localScale.y = +1f;
         }
         this.transform.localScale = localScale;
     }

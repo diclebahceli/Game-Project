@@ -68,14 +68,14 @@ public class Pistol : MonoBehaviour, IGun
         transform.rotation = Quaternion.Euler(this.transform.rotation.x, transform.rotation.y, rotateZ);
 
         // to make the gun straight in every angle
-        Vector3 localScale = new Vector3(0.8f, 0.8f, 1);
+        Vector3 localScale = new Vector3(1f, 1f, 1);
         if (rotateZ > 90 || rotateZ < -90)
         {
-            localScale.y = -0.8f;
+            localScale.y = -1f;
         }
         else
         {
-            localScale.y = +0.8f;
+            localScale.y = +1f;
         }
         this.transform.localScale = localScale;
     }

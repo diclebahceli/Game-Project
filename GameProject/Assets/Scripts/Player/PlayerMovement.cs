@@ -1,10 +1,10 @@
-
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     public Rigidbody2D rb;
     public float speed;
@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mousePos;
     private PhotonView photonView;
     [SerializeField] Camera playerCamera;
+    [SerializeField] GameObject healthBar;
+    [SerializeField] GameObject playerContainer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!photonView.IsMine)
         {
+            Destroy(healthBar);
             Destroy(playerCamera.gameObject);
         }
 
@@ -102,23 +105,26 @@ public class PlayerMovement : MonoBehaviour
         movement = dir * speed * Time.deltaTime;
         rb.velocity = movement;
     }
-    public void takeHit(int damage)
-    {
-        lifeCount -= damage;
-        if (lifeCount < 0)
-        {
-            animator.SetBool("dead", true);
-            Destroy(gameObject, 1f);
-        }
-    }
+
     public void takeHit()
     {
+        photonView.RPC("takeDamage", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void takeDamage()
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        healthBar.GetComponent<Slider>().value -= 1;
+        print(healthBar.GetComponent<Slider>().value);
         lifeCount--;
-        if (lifeCount < 0)
+        if (lifeCount <= 0)
         {
             animator.SetBool("dead", true);
-            Destroy(gameObject, 1f);
+            PhotonNetwork.Destroy(gameObject);
         }
-
     }
 }

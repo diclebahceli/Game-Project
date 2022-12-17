@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 1843453140}
   - component: {fileID: 5061422966155983394}
   - component: {fileID: -7652996996653104775}
-  - component: {fileID: 2158401328263596934}
   - component: {fileID: 5379356748774411681}
   - component: {fileID: 4609206706922183669}
+  - component: {fileID: 7696059635443158960}
   m_Layer: 6
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +175,8 @@ MonoBehaviour:
   speed: 300
   animator: {fileID: 0}
   playerCamera: {fileID: 0}
+  healthBar: {fileID: 0}
+  playerContainer: {fileID: 0}
 --- !u!114 &-7652996996653104775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,28 +196,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2158401328263596934}
   - {fileID: 5379356748774411681}
   - {fileID: 4609206706922183669}
+  - {fileID: 7696059635443158960}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2158401328263596934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004667377986883104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &5379356748774411681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,3 +248,19 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &7696059635443158960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004667377986883104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 0
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
