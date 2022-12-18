@@ -36,8 +36,8 @@ public class Bullet : MonoBehaviour
         }
         if (col.collider.CompareTag("Player"))
         {
-            col.gameObject.GetComponent<PlayerMovement>().takeHit();
-            PhotonNetwork.Destroy(gameObject);
+            // col.gameObject.GetComponent<PlayerMovement>().takeHit();
+            // PhotonNetwork.Destroy(gameObject);
         }
     }
 }

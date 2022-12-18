@@ -7,8 +7,11 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private GameObject playerToFollow;
     private PhotonView photonView;
+
+    private bool isPlayerDead;
     void Awake()
     {
+        isPlayerDead = false;
         photonView = GetComponent<PhotonView>();
 
     }
@@ -20,10 +23,18 @@ public class CameraMovement : MonoBehaviour
         {
             return;
         }
-        FollowPlayer();
+        if (!isPlayerDead)
+        {
+            FollowPlayer();
+        }
     }
     void FollowPlayer()
     {
         transform.position = new Vector3(playerToFollow.transform.position.x, playerToFollow.transform.position.y, transform.position.z);
+    }
+    public void setPlayerDead(bool isDead)
+    {
+        isPlayerDead = isDead;
+        this.transform.position = new Vector3(0, 0, -10);
     }
 }
