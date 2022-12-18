@@ -6,7 +6,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine.SceneManagement;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
 
@@ -30,13 +29,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+
+        PhotonNetwork.AutomaticallySyncScene = true;
         GetUserName();
     }
 
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
-        PhotonNetwork.AutomaticallySyncScene = true;
 
     }
 
@@ -117,7 +117,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(4);
 
     }
 
@@ -155,5 +155,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Instantiate(playerListItemPrefab, playerListContent).
                         GetComponent<PlayerListItem>().SetUp(newPlayer);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

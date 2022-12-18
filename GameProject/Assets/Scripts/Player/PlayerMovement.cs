@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private bool hasGun;
     [SerializeField] private int lifeCount;
     private Vector2 mousePos;
+    private bool canTakeDamage;
 
 
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         lifeCount = 5;
         animator = GetComponent<Animator>();
         usernameText.text = PhotonNetwork.NickName;
+        canTakeDamage = true;
 
     }
     private void Start()
@@ -41,20 +44,35 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             Destroy(healthBar);
             Destroy(playerCamera.gameObject);
         }
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            canTakeDamage = false;
+        }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckAnimatorParameters();
         if (!PV.IsMine)
         {
             return;
         }
+        CheckAnimatorParameters();
         CheckLeftRight();
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (lifeCount <= 0)
         {
-            PV.RPC(nameof(doubleSize), RpcTarget.AllBuffered);
+            playerCamera.GetComponent<CameraMovement>().setPlayerDead(true);
+            PV.RPC("Die", RpcTarget.AllBuffered);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 2 && PhotonNetwork.IsMasterClient && FindObjectOfType<Countdown>().remainingTime <= 0)
+        {
+            // PhotonNetwork.LoadLevel(3);
         }
 
 
@@ -125,16 +143,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [PunRPC]
     public void takeDamage()
     {
-        animator.SetTrigger("hitTrigger");
-        healthBar.GetComponent<Slider>().value -= 1;
-        lifeCount--;
-        if (lifeCount <= 0)
+        if (PV.IsMine && canTakeDamage)
         {
-            playerCamera.GetComponent<CameraMovement>().setPlayerDead(true);
-            healthBar.SetActive(false);
-            usernameText.gameObject.SetActive(false);
-            animator.SetBool("dead", true);
-            StartCoroutine("killAfter");
+            animator.SetTrigger("hitTrigger");
+            healthBar.GetComponent<Slider>().value -= 1;
+            lifeCount--;
         }
     }
 
@@ -143,8 +156,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (other.CompareTag("Bullet"))
         {
 
-            PhotonNetwork.Destroy(other.gameObject);
-            print("AAAAAAAAAAAAA TAKING DAMAGE");
+            other.gameObject.GetComponent<PhotonView>().RPC("Die", RpcTarget.AllBuffered);
+            // PhotonNetwork.Destroy(other.gameObject);
             PV.RPC("takeDamage", RpcTarget.All);
         }
     }
@@ -157,10 +170,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     }
 
 
-    //rpc ile setactive i control etmeye calis
     [PunRPC]
-    void doubleSize()
+    void Die()
     {
-        this.transform.localScale = new Vector3(2, 2, 2);
+        animator.SetBool("dead", true);
+        StartCoroutine("killAfter");
     }
 }

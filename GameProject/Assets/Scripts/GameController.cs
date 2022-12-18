@@ -38,7 +38,7 @@ public class GameController : MonoBehaviourPunCallbacks
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex == 2)
+        if (scene.buildIndex == 4)
         { //we're in the game scene
             PhotonNetwork.Instantiate("PlayerManager", Vector3.zero, Quaternion.identity);
         }

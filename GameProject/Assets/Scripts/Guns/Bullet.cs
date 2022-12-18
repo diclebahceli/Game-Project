@@ -34,10 +34,14 @@ public class Bullet : MonoBehaviour
         {
             PhotonNetwork.Destroy(gameObject);
         }
-        if (col.collider.CompareTag("Player"))
+    }
+
+    [PunRPC]
+    void Die()
+    {
+        if (gameObject.GetComponent<PhotonView>().IsMine)
         {
-            // col.gameObject.GetComponent<PlayerMovement>().takeHit();
-            // PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
